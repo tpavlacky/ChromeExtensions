@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Select range colors</title>
+</head>
+
+<body>
+    <style>
+        #status {
+            color: #42f554;
+            font-weight: bold;
+            font-size: 20px;
+        }
+    </style>
+    <h1>Select range colors</h1>
+    <div>
+        <label for="range1">0-10:</label>
+        <input type="color" id="color1" name="range1">
+    </div>
+    <div>
+        <label for="range2">10-20:</label>
+        <input type="color" id="color2" name="range2">
+    </div>
+    <div>
+        <label for="range3">20-30:</label>
+        <input type="color" id="color3" name="range3">
+    </div>
+    <div>
+        <label for="range4">30-40:</label>
+        <input type="color" id="color4" name="range4">
+    </div>
+    <div>
+        <label for="range5">40+</label>
+        <input type="color" id="color5" name="range5">
+    </div>
+    <div>
+        <br />
+        <button id="save" type="submit">Save</button>
+        <p id="status"></p>
+
+        <script src="scripts/options.js"></script>
+</body>
+
+</html>

@@ -30,10 +30,8 @@ observer.observe(document, {
 
 function run() {
   const marketItems = document.getElementsByClassName("marketplace-buy-item-card");
-  var itemNr = 0;
   if (marketItems.length > 0) {
     for (let item of marketItems) {
-      itemNr++;
       calculateRatio(item)
     }
   } else {
@@ -43,8 +41,8 @@ function run() {
 
 function calculateRatio(item) {
   var itemPriceWrapper = item.querySelector(".item-price-wrapper");
-  if(itemPriceWrapper?.classList.contains("ratioCalculated")){
-    console.warn("Ratio already calculated");
+  if (itemPriceWrapper?.classList.contains("ratioCalculated")) {
+    console.log("Ratio already calculated");
     return;
   }
 
@@ -89,9 +87,31 @@ function calculateRatio(item) {
   const ratioBadge = document.createElement("p");
   ratioBadge.textContent = `⚖️ Ratio: ${ratio}`;
   ratioBadge.classList.add("item-price");
-  ratioBadge.style.color = "#FF0080";
-  itemPriceWrapper.insertAdjacentElement("beforeend", ratioBadge);
 
+  chrome.storage.sync.get(
+    {
+      range1: "#FF0080",
+      range2: "#FF0080",
+      range3: "#FF0080",
+      range4: "#FF0080",
+      range5: "#FF0080"
+    }, (items) => {
+      let color;
+      if (ratio < 10) {
+        color = items.range1;
+      } else if (ratio < 20) {
+        color = items.range2;
+      } else if (ratio < 30) {
+        color = items.range3;
+      } else if (ratio < 40) {
+        color = items.range4;
+      } else {
+        color = items.range5;
+      }
+      ratioBadge.style.color = color;
+    });
+    
+  itemPriceWrapper.insertAdjacentElement("beforeend", ratioBadge);
   itemPriceWrapper.classList.add("ratioCalculated");
 }
 
