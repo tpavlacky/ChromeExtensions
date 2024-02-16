@@ -69,7 +69,7 @@ function calculateRatio(item) {
   }
 
   const powerValueNumber = +(powerValue);
-  const priceValueNumber = +priceElement.textContent.split(" ")[0];
+  const priceValueNumber = +priceElement.textContent.split("RLT")[0].replace(/\s/g, "");
 
   if (isNaN(powerValue) || isNaN(priceValueNumber)) {
     console.error("Error during conversion to number");
@@ -110,7 +110,7 @@ function calculateRatio(item) {
       }
       ratioBadge.style.color = color;
     });
-    
+
   itemPriceWrapper.insertAdjacentElement("beforeend", ratioBadge);
   itemPriceWrapper.classList.add("ratioCalculated");
 }
