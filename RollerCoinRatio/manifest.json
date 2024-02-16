@@ -16,7 +16,7 @@
       "js": ["scripts/content.js"],
       "run_at": "document_end",
       "matches": [
-        "https://rollercoin.com/marketplace*"
+        "https://rollercoin.com/marketplace"
       ]
     }
   ]
