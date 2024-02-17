@@ -109,6 +109,14 @@ function calculateRatio(item) {
         color = items.range5;
       }
       ratioBadge.style.color = color;
+
+      let borderColor;
+      if (ratio >= 30) {
+        item.style.borderColor = color;
+        item.style.borderWidth = "5px";
+      }
+
+
     });
 
   itemPriceWrapper.insertAdjacentElement("beforeend", ratioBadge);
