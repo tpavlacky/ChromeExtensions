@@ -1,3 +1,4 @@
+console.log("Running");
 const observer = new MutationObserver(function (mutations, mutationInstance) {
   var hasUpdates = false;
 
@@ -29,14 +30,16 @@ observer.observe(document, {
 });
 
 function run() {
-  const marketItems = document.getElementsByClassName("marketplace-buy-item-card");
-  if (marketItems.length > 0) {
-    for (let item of marketItems) {
+  const marketplaceBuyItemCards = document.getElementsByClassName("marketplace-buy-item-card");
+  if (marketplaceBuyItemCards.length > 0) {
+    for (let item of marketplaceBuyItemCards) {
       calculateRatio(item)
     }
   } else {
     console.warn("No items found");
   }
+
+  reorderItems(marketplaceBuyItemCards);
 }
 
 function calculateRatio(item) {
@@ -85,6 +88,8 @@ function calculateRatio(item) {
   }
 
   const ratioBadge = document.createElement("p");
+  // sets ratio directly on marketplace-buy-item-card for easier ordering later
+  item.setAttribute("ratio", ratio);
   ratioBadge.textContent = `⚖️ Ratio: ${ratio}`;
   ratioBadge.classList.add("item-price");
 
@@ -134,4 +139,25 @@ function getMultiplicator(stringValue) {
   }
 
   return null;
+}
+
+function reorderItems(marketplaceBuyItemCards) {
+  console.log(`Items to reorder count: ${marketplaceBuyItemCards.length}`);
+  if (marketplaceBuyItemCards.length == 0) {
+    return;
+  }
+
+  var firstElement = marketplaceBuyItemCards[0];
+  var parentElement = firstElement.parentElement;
+
+  var items = [];
+
+  for (var i = 0; i < marketplaceBuyItemCards.length; ++i) {
+    items.push(marketplaceBuyItemCards[i]);
+  }
+
+  // Sort the cards based on 'ratio' value. 
+  items.sort(function (a, b) {
+    return +b.getAttribute("ratio") - +a.getAttribute("ratio");
+  }).forEach(element => parentElement.appendChild(element));
 }
