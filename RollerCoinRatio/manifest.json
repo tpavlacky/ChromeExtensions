@@ -22,7 +22,7 @@
     {
       "js": ["scripts/content.js"],
       "matches": [
-        "https://rollercoin.com/marketplace"
+        "https://rollercoin.com/marketplace*"
       ]
     }
   ]
